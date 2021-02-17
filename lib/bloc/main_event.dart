@@ -5,9 +5,9 @@ abstract class CriptorEvent {}
 
 class CriptIt extends CriptorEvent {
   final String string;
-  final int key;
+  final String gamma;
 
-  CriptIt(this.string, this.key);
+  CriptIt(this.string, this.gamma);
 }
 
 class DecriptIT extends CriptorEvent {

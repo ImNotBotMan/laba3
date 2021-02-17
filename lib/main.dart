@@ -4,8 +4,6 @@ import 'bloc/main_bloc.dart';
 import 'pop_up.dart';
 import 'criptor.dart';
 
-String inputData;
-bool isEncrypt;
 void main() {
   runApp(MyApp());
 }
@@ -43,7 +41,7 @@ class ToEncrypt extends StatelessWidget {
               onPressed: () {},
             ),
             title: Text(
-              "Лабораторная #2",
+              "Лабораторная #3",
               style: TextStyle(color: Colors.black, fontSize: 19),
             ),
           ),
@@ -86,10 +84,8 @@ class ToEncrypt extends StatelessWidget {
                                   left: 12, top: 16, bottom: 17),
                               child: TextFormField(
                                 controller: inputKeyController,
-                                maxLength: 1,
-                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration.collapsed(
-                                    hintText: 'Введите шаг шифровки'),
+                                    hintText: 'Введите гамму'),
                               ))),
                       Container(
                           margin: EdgeInsets.only(left: 18, right: 18, top: 21),
@@ -102,40 +98,21 @@ class ToEncrypt extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             onPressed: () {
-                              isEncrypt = true;
+                              match.clear();
                               // keyList.add(randomizer);
-                              encryptWord.clear();
                               BlocProvider.of<CriptorBloc>(context).add(CriptIt(
                                   "${inputController.text.replaceAll(new RegExp(r"\s+\b|\b\s"), "")}",
-                                  int.parse(inputKeyController.text)));
+                                  "${inputKeyController.text.replaceAll(new RegExp(r"\s+\b|\b\s"), "")}"));
                             },
                             color: Color(0xff8EB8FF),
                             textColor: Color(0xffF3F5FA),
                           )),
-                      Container(
-                          margin: EdgeInsets.only(left: 18, right: 18, top: 21),
-                          child: MaterialButton(
-                            child: Text(" <-- Дешифровать --> ",
-                                style: TextStyle(fontSize: 16)),
-                            minWidth: double.infinity,
-                            height: 52,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            onPressed: () {
-                              isEncrypt = false;
-                              decryptWord.clear();
-                              BlocProvider.of<CriptorBloc>(context).add(
-                                  DecriptIT(
-                                      encryptWord.join(),
-                                      inputController.text
-                                          .replaceAll(
-                                              new RegExp(r"\s+\b|\b\s"), "")
-                                          .length));
-                            },
-                            color: Color(0xff8EB8FF),
-                            textColor: Color(0xffF3F5FA),
-                          )),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                            "Величина длинны строки 'гамма' должна совпадать с длинной строки которую необходимо зашифровать",
+                            style: TextStyle(fontSize: 16)),
+                      )
                     ],
                   ),
                 );
@@ -154,8 +131,7 @@ class ToEncrypt extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true).pop();
               }
               if (state is PopUpState) {
-                popupWindow(
-                    encryptWord.join(), decryptWord.join(), isEncrypt, context);
+                popupWindow(match.join(), context);
               }
             },
             buildWhen: (previous, current) => current is CriptorMainState,

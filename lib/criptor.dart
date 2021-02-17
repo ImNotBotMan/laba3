@@ -1,5 +1,3 @@
-import 'dart:math';
-
 const List<String> ALPHABET = [
   "a",
   "b",
@@ -29,16 +27,16 @@ const List<String> ALPHABET = [
   "z"
 ];
 
-///получаем результат шифровки
-String getEncriptWord(text1, text2) {
-  List match = [];
+List match = [];
 
+///получаем результат шифровки text1 строка для шифрования text2 гамма строка
+String getEncriptWord(String text1, String text2) {
   ///списки с индексами каждого слова
   var first = getIndex(text1);
   var second = getIndex(text2);
 
   for (var i = 0; i < first.length; i++) {
-    //складываем два индкса и вычитаем из результата длину алфавита
+    ///складываем два индкса и вычитаем из результата длину алфавита
     var a = first[i] + second[i];
     var b = a - ALPHABET.length;
 
@@ -47,7 +45,7 @@ String getEncriptWord(text1, text2) {
       b = -(b);
     }
 
-    /// если всё ок, то вычитаем еденицу
+    /// если всё ок, то вычитаем единицу
     if (b > 0) {
       b = b - 1;
     }

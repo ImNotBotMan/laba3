@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> popupWindow(
-    encryptData, decryptData, bool isEncrypt, BuildContext context) async {
+Future<void> popupWindow(encryptData, BuildContext context) async {
   showDialog(
       context: context,
       builder: (context) {
@@ -13,16 +12,14 @@ Future<void> popupWindow(
                   Padding(
                       padding: EdgeInsets.only(top: 20),
                       child: Text(
-                        isEncrypt
-                            ? "Результат Зашифровки"
-                            : "Результат Дешифровки",
+                        "Результат Зашифровки",
                         style: TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       )),
                   Padding(
                       padding: EdgeInsets.only(top: 20),
                       child: Text(
-                        isEncrypt ? "$encryptData" : "$decryptData",
+                        "$encryptData",
                         style: TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       )),
