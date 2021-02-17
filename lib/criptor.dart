@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:laba3/main.dart';
+
 const List<String> ALPHABET = [
   "a",
   "b",
@@ -29,46 +31,30 @@ const List<String> ALPHABET = [
   "z"
 ];
 
-List encryptWord = [];
-List decryptWord = [];
-
-// int lData;
-
-criptor<String>(
-  String string,
-  int key,
-  bool isCriptor,
-) {
-  int encryptStep;
-  int decryptStep;
-
-  print("ИСХОДНАЯ СТРОКА $string");
-
-  List word = string.toString().toLowerCase().split("");
-
-  for (var i = 0; i < word.length; i++) {
-    switch (isCriptor) {
-      case true:
-        {
-          encryptStep = ALPHABET.indexOf(word[i]) + key;
-          if (encryptStep >= 26) {
-            encryptWord
-                .add(ALPHABET[key - 1 - (25 - ALPHABET.indexOf(word[i]))]);
-          } else
-            encryptWord.add(ALPHABET[encryptStep]);
-        }
-        break;
-      case false:
-        {
-          decryptStep = ALPHABET.indexOf(word[i]) - key;
-          if (decryptStep < 0) {
-            decryptWord.add(ALPHABET[26 + decryptStep]);
-          } else {
-            decryptWord.add(ALPHABET[decryptStep]);
-          }
-        }
-        break;
+String getEncriptWord(text1, text2) {
+  List match = [];
+  var first = getIndex(text1);
+  var second = getIndex(text2);
+  for (var i = 0; i < first.length; i++) {
+    var a = first[i] + second[i];
+    var b = a - ALPHABET.length;
+    if (b < 0) {
+      b = -(b);
     }
-    print("КОНЕЧНАЯ СТРОКА ${encryptWord.join()}");
+    if (b > 0) {
+      b = b - 1;
+    }
+    match.add(ALPHABET[b]);
+    print(match);
   }
+  return match.join();
+}
+
+List getIndex(String text) {
+  List encryptIndex = [];
+  List wordList = text.toString().toLowerCase().split("");
+  wordList.forEach((element) {
+    encryptIndex.add(ALPHABET.indexOf(element));
+  });
+  return encryptIndex;
 }
